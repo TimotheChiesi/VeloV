@@ -3,38 +3,18 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  # 1. Monitor Prometheus itself
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
 
-  # 2. Spark Master & Worker (Requires Spark config, see below)
   - job_name: 'spark-master'
-    metrics_path: /metrics/master/prometheus
     static_configs:
       - targets: ['spark-master:8080']
 
   - job_name: 'spark-worker'
-    metrics_path: /metrics/prometheus
     static_configs:
       - targets: ['spark-worker:8081']
 
-  # 3. Postgres (Requires postgres-exporter)
-  - job_name: 'postgres'
-    static_configs:
-      - targets: ['postgres-exporter:9187']
-
-  # 4. MongoDB (Requires mongodb-exporter)
   - job_name: 'mongodb'
     static_configs:
       - targets: ['mongodb-exporter:9216']
-
-  # 5. Kafka (Requires kafka-exporter)
-  - job_name: 'kafka'
-    static_configs:
-      - targets: ['kafka-exporter:9308']
-
-  # 6. Airflow (Requires statsd-exporter)
-  - job_name: 'airflow'
-    static_configs:
-      - targets: ['statsd-exporter:9102']
