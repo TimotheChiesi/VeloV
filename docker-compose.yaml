@@ -154,6 +154,18 @@ services:
     depends_on:
       - mongodb
 
+########################
+# POSTGRESQL EXPORTER
+########################
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:v0.15.0
+    ports:
+      - "9187:9187"
+    environment:
+      DATA_SOURCE_NAME: "postgresql://${AIRFLOW_POSTGRES_USER}:${AIRFLOW_POSTGRES_PASSWORD}@postgres:5432/${AIRFLOW_POSTGRES_DB}?sslmode=disable"
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
   mongodb_data:
