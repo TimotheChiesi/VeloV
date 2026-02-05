@@ -55,7 +55,7 @@ jobs:
 
       - name: Check Python requirements inside Airflow
         run: |
-          docker compose exec -T velov-airflow-webserver-1 python - <<EOF
+          docker compose exec -T airflow-webserver python - <<EOF
           import requests
           import pymongo
           import psycopg2
