@@ -51,9 +51,9 @@ jobs:
 
       - name: Wait for Airflow Webserver
         run: |
+          echo "Waiting for Airflow webserver to be ready..."
           timeout 300 bash -c '
-            until docker compose ps airflow-webserver | grep "healthy"; do
-              echo "Waiting for Airflow webserver..."
+            until docker compose exec -T airflow-webserver airflow db check >/dev/null 2>&1; do
               sleep 5
             done
           '
