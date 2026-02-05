@@ -9,6 +9,12 @@ x-airflow-common: &airflow-common
     MONGO_DB_NAME: ${MONGO_DB_NAME}
     MONGO_COLLECTION: ${MONGO_COLLECTION}
     API_URL: ${API_URL}
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: 5432
+    POSTGRES_DB: ${AIRFLOW_POSTGRES_DB}
+    POSTGRES_USER: ${AIRFLOW_POSTGRES_USER}
+    POSTGRES_PASSWORD: ${AIRFLOW_POSTGRES_PASSWORD}
+
 
     # Libs Python pour scraping + Supabase
     _PIP_ADDITIONAL_REQUIREMENTS: "requests beautifulsoup4 supabase python-dotenv pymongo"

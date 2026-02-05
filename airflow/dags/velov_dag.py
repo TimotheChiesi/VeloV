@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from velov_extract import VeloVExtractor
+from velov_process import VeloVProcessor
 
 default_args = {
     'owner': 'airflow',
@@ -13,6 +14,9 @@ default_args = {
 def trigger_extraction():
     extractor = VeloVExtractor()
     extractor.run()
+
+def trigger_processing():
+    VeloVProcessor().run()
 
 with DAG(
     'velov_realtime_fetch',
@@ -27,3 +31,10 @@ with DAG(
         task_id='fetch_and_load_velov',
         python_callable=trigger_extraction,
     )
+
+    process_task = PythonOperator(
+    task_id="process_velov_data",
+    python_callable=trigger_processing
+    )
+
+    fetch_task >> process_task
