@@ -1,0 +1,46 @@
+name: CI - Docker Requirements Check
+
+on:
+  push:
+    branches: 
+      - "main" 
+      - "feat/**"
+      - "fix/**"
+
+jobs:
+  docker-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build containers
+        run: |
+          docker compose build
+
+      - name: Start containers
+        run: |
+          docker compose up -d
+
+      - name: Wait for Airflow container
+        run: |
+          sleep 30
+
+      - name: Check Python requirements inside Airflow
+        run: |
+          docker compose exec -T velov-airflow-webserver-1 python - <<EOF
+          import requests
+          import pymongo
+          import psycopg2
+          import dotenv
+          print("✅ Python requirements OK inside Airflow container")
+          EOF
+
+      - name: Shutdown containers
+        if: always()
+        run: |
+          docker compose down -v
