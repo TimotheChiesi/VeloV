@@ -1,5 +1,8 @@
 # 🚲 Velo’v Realtime Data Pipeline
 
+## Made By
+**Omayma El Kasbaoui** and **Timothé Chiesi**
+
 This project fetches Velo’v bike station data in real time, processes it with **Airflow**, stores raw data in **MongoDB**, and writes cleaned, deduplicated data into **PostgreSQL**.  
 Monitoring is provided via **Prometheus** and **Grafana**, and the stack runs fully in **Docker**.
 
@@ -68,6 +71,7 @@ docker compose up -d
 ## 🌐 Access the Services
 
 - Airflow UI: http://localhost:8080 (airflow / airflow)
+- Grafana Monitoring: http://localhost:3000/
 
 ## 🛑 Stop the Stack
 
