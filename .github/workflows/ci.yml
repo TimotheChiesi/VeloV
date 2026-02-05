@@ -15,6 +15,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create .env file
+        run: |
+          cat <<EOF > .env
+          AIRFLOW_IMAGE_NAME=${{ secrets.AIRFLOW_IMAGE_NAME }}
+
+          AIRFLOW__CORE__EXECUTOR=${{ secrets.AIRFLOW__CORE__EXECUTOR }}
+          AIRFLOW__CORE__FERNET_KEY=${{ secrets.AIRFLOW__CORE__FERNET_KEY }}
+          AIRFLOW__CORE__LOAD_EXAMPLES=${{ secrets.AIRFLOW__CORE__LOAD_EXAMPLES }}
+          AIRFLOW_UID=${{ secrets.AIRFLOW_UID }}
+
+          AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=${{ secrets.AIRFLOW__DATABASE__SQL_ALCHEMY_CONN }}
+
+          AIRFLOW_POSTGRES_USER=${{ secrets.AIRFLOW_POSTGRES_USER }}
+          AIRFLOW_POSTGRES_PASSWORD=${{ secrets.AIRFLOW_POSTGRES_PASSWORD }}
+          AIRFLOW_POSTGRES_DB=${{ secrets.AIRFLOW_POSTGRES_DB }}
+          
+          MONGO_URI=${{ secrets.MONGO_URI }}
+          MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }}
+          MONGO_COLLECTION=${{ secrets.MONGO_COLLECTION }}
+
+          API_URL=${{ secrets.API_URL }}
+          EOF
+
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
 
