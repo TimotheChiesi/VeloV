@@ -49,9 +49,14 @@ jobs:
         run: |
           docker compose up -d
 
-      - name: Wait for Airflow container
+      - name: Wait for Airflow Webserver
         run: |
-          sleep 30
+          timeout 60 bash -c '
+            until docker compose ps airflow-webserver | grep "healthy"; do
+              echo "Waiting for Airflow webserver..."
+              sleep 5
+            done
+          '
 
       - name: Check Python requirements inside Airflow
         run: |
