@@ -17,8 +17,8 @@ def trigger_extraction():
 with DAG(
     'velov_realtime_fetch',
     default_args=default_args,
-    description='Fetch Velo\'v station data every minute',
-    schedule_interval='* * * * *',  # Every minute
+    description='Fetch Velo\'v station data every 5 minutes',
+    schedule_interval='*/5 * * * *',  # Every 5 minutes
     start_date=datetime(2024, 1, 1),
     catchup=False,
 ) as dag:
