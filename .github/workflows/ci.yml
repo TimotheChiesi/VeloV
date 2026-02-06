@@ -47,6 +47,16 @@ jobs:
       - name: Start containers
         run: docker compose up -d
 
+      - name: Verify Airflow Initialization
+        run: |
+          CONTAINER_ID=$(docker compose ps -q airflow-init)
+          EXIT_CODE=$(docker wait $CONTAINER_ID)
+          if [ "$EXIT_CODE" != "0" ]; then
+            echo "Airflow initialization failed"
+            docker compose logs airflow-init
+            exit 1
+          fi
+
       - name: Check if any containers failed to start
         run: |
           BAD=$(docker compose ps --status created --status restarting -q)
