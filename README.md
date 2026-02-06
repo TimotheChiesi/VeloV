@@ -67,11 +67,50 @@ docker compose up airflow-init
 docker compose up -d
 ```
 
-
 ## 🌐 Access the Services
 
-- Airflow UI: http://localhost:8080 (airflow / airflow)
-- Grafana Monitoring: http://localhost:3000/
+### Airflow
+
+**Access:** (Airflow URL)[http://localhost:8080]
+
+**Credentials:** 
+- **Username:** `airflow`
+- **Password:** `airflow`
+
+All DAGs are located in the `airflow/dags/` folder and will be parsed automatically.
+
+### Grafana
+
+**Access:** (Grafana URL)[http://localhost:3000]
+
+**Credentials:**
+- **Username:** `admin` 
+- **Password:** `admin`
+
+[!TIP] On your first login, you will be prompted to update your password. You can click **Skip** to continue using the default credentials.
+
+**Available Dashboards:** The environment is fully provisioned. Once logged in, you will find two pre-configured dashboards:
+- **MongoDB Data Lake:** Tracks raw data ingestion stats.
+- **PostgreSQL Final Database:** Visualizes processed and structured data metrics.
+
+### MongoDB
+
+**Access:** (mongodb://localhost:27017)[mongodb://localhost:27017]
+
+**Credentials:** no username and password
+
+**Database:** `velov_db`
+
+### PostgreSQL
+
+**Access:** (jdbc:postgresql://localhost:5433/airflow)[jdbc:postgresql://localhost:5433/airflow]
+
+**Credentials:**
+- **Username:** `airflow` 
+- **Password:** `airflow`
+
+**Database:** `airflow`
+**Table:** `velov_processed`
 
 ## 🛑 Stop the Stack
 
