@@ -144,6 +144,27 @@ If the dashboard appears empty or doesn't reflect recent data updates:
 ![Streamlit View](./assets/Streamlit_5.png)
 ![Streamlit View](./assets/Streamlit_6.png)
 
+## 🧪 Continuous Integration (CI)
+
+This project includes a **GitHub Actions CI workflow** to ensure the Dockerized environment works correctly and that all required Python dependencies are installed in the Airflow webserver.
+
+### CI Workflow Overview
+
+The workflow performs the following steps on every push to `main` or feat/fix branches:
+
+1. **Checkout repository** – pulls the latest code.  
+2. **Create `.env` file** – dynamically generates environment variables from GitHub secrets.  
+3. **Set up Docker Buildx** – enables multi-platform Docker builds.  
+4. **Create Airflow folders** – ensures `dags`, `logs`, and `plugins` directories exist.  
+5. **Fix permissions** – assigns proper ownership to `AIRFLOW_UID` so Airflow can write logs.  
+6. **Initialize Airflow** – runs `airflow db migrate` and creates the default admin user.  
+7. **Start the full stack** – launches all services.  
+8. **Wait for webserver** – gives the Airflow webserver time to start.  
+9. **Verify Python packages** – checks that required packages (`requests`, `beautifulsoup4`, `supabase`, `python-dotenv`, `pymongo`) are installed in the Airflow webserver container.  
+10. **Check container health** – ensures no container failed to start.  
+11. **Shutdown environment** – stops and removes all containers and optionally volumes.
+
+
 ## 🛑 Stop the Stack
 
 ```bash
