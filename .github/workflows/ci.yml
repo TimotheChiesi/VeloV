@@ -55,6 +55,9 @@ jobs:
       - name: Start airflow-init container
         run: docker compose run --rm airflow-init
 
+      - name: Start containers
+        run: docker compose up -d
+
       - name: Wait for Airflow webserver
         run: sleep 70
 
@@ -66,10 +69,6 @@ jobs:
           docker ps -a
           
           docker exec airflow-webserver pip show requests beautifulsoup4 supabase python-dotenv pymongo
-
-
-      - name: Start containers
-        run: docker compose up -d
 
       - name: Check if any containers failed to start
         run: |
