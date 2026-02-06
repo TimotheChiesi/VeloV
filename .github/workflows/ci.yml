@@ -68,7 +68,7 @@ jobs:
           echo "Checking Python packages in container $CONTAINER_ID"
           docker ps -a
           
-          docker exec airflow-webserver pip show requests beautifulsoup4 supabase python-dotenv pymongo
+          docker compose exec airflow-webserver pip show requests beautifulsoup4 supabase python-dotenv pymongo
 
       - name: Check if any containers failed to start
         run: |
