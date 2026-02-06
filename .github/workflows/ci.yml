@@ -63,7 +63,7 @@ jobs:
           CONTAINER_ID=$(docker compose ps -q airflow-webserver)
 
           echo "Checking Python packages in container $CONTAINER_ID"
-          docker ps -aq
+          docker ps -a
           
           docker exec airflow-webserver pip show requests beautifulsoup4 supabase python-dotenv pymongo
 
