@@ -47,14 +47,18 @@ jobs:
       - name: Start containers
         run: docker compose up -d
 
-      - name: Fail if any container failed to start
+      - name: Check if any containers failed to start
         run: |
-          if docker compose ps --status created --status restarting | grep -q .; then
+          BAD=$(docker compose ps --status created --status restarting -q)
+
+          if [ -n "$BAD" ]; then
             echo "Some containers failed to start"
-            docker compose ps
+            docker compose ps -a
             exit 1
           fi
+
           echo "All containers started successfully"
+
 
       - name: Shutdown containers
         if: always()
