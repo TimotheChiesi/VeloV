@@ -79,11 +79,11 @@ docker compose up -d
 
 All DAGs are located in the `airflow/dags/` folder and will be parsed automatically.
 
+![Airflow Web View](./assets/Airflow_Web_view.png)
+
 ### Grafana
 
 **Access:** [Grafana URL](http://localhost:3000)
-
-
 
 **Credentials:**
 - **Username:** `admin` 
@@ -93,7 +93,10 @@ All DAGs are located in the `airflow/dags/` folder and will be parsed automatica
 
 **Available Dashboards:** The environment is fully provisioned. Once logged in, you will find two pre-configured dashboards:
 - **MongoDB Data Lake:** Tracks raw data ingestion stats.
+![MongoDB Dashboard View](./assets/MongoDB-Dashboard.png)
+
 - **PostgreSQL Final Database:** Visualizes processed and structured data metrics.
+![PostgreSQL Dashboard View](./assets/PostgreSQL-Dasboard.png)
 
 ### MongoDB
 
@@ -113,6 +116,33 @@ All DAGs are located in the `airflow/dags/` folder and will be parsed automatica
 
 **Database:** `airflow`
 **Table:** `velov_processed`
+
+### Streamlit dashboard
+
+**Access:** [Streamlit Dashboard](http://localhost:8501/)
+
+The Streamlit dashboard provides a visual analytics layer over the final processed data in PostgreSQL. It includes:
+- **Real-time Alerts:** Identification of stations with no bikes available or no free docking slots.
+- **System Overview:** Global Velo'v statistics and current station status.
+- **Deep-Dive Analysis:** Occupancy patterns, geographic distribution, and temporal trends.
+- **Station Profiles:** Detailed metrics for individual docking points.
+
+**Note:** If you have just launched the docker-compose environment, your graphs may appear sparse. The dashboard will populate and show more complex trends as the data lake collects more history over time.
+
+**Troubleshooting**
+
+If the dashboard appears empty or doesn't reflect recent data updates:
+1. Click the three dots (⋮) in the top-right corner.
+2. Select "Clear cache".
+3. Click "Rerun" to refresh the data connection.
+
+**Gallery:**
+![Streamlit View](./assets/Streamlit_1.png)
+![Streamlit View](./assets/Streamlit_2.png)
+![Streamlit View](./assets/Streamlit_3.png)
+![Streamlit View](./assets/Streamlit_4.png)
+![Streamlit View](./assets/Streamlit_5.png)
+![Streamlit View](./assets/Streamlit_6.png)
 
 ## 🛑 Stop the Stack
 
