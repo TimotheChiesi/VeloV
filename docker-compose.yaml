@@ -99,7 +99,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus-config.yml:/etc/prometheus/prometheus-config.yml
 
 ########################
 # GRAFANA
@@ -143,7 +143,7 @@ services:
 ########################
   streamlit-dashboard:
     build:
-      context: ./dashboard
+      context: streamlit
       dockerfile: Dockerfile
     ports:
       - "8501:8501"

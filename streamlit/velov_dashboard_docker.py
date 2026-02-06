@@ -124,10 +124,10 @@ def create_alerts_section(latest_data):
                     )
 
 
-# Main dashboard
+# Main streamlit
 def main():
     st.title("🚲 Vélo'v Bike Sharing Dashboard")
-    st.caption("Real-time monitoring of bike-sharing stations")
+    st.caption("Real-time prometheus of bike-sharing stations")
 
     # Sidebar
     st.sidebar.header("⚙️ Settings")
