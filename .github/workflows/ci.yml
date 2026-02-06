@@ -50,9 +50,6 @@ jobs:
       - name: Start airflow-init container
         run: docker compose up -d airflow-init
 
-      - name: Start containers
-        run: docker compose up -d
-
       - name: Verify Airflow Initialization
         run: |
           CONTAINER_ID=$(docker compose ps -q airflow-init)
@@ -62,6 +59,9 @@ jobs:
             docker compose logs airflow-init
             exit 1
           fi
+
+      - name: Start containers
+        run: docker compose up -d
 
       - name: Check if any containers failed to start
         run: |
