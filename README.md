@@ -71,7 +71,7 @@ docker compose up -d
 
 ### Airflow
 
-**Access:** (Airflow URL)[http://localhost:8080]
+**Access:** [Airflow URL](http://localhost:8080)
 
 **Credentials:** 
 - **Username:** `airflow`
@@ -81,7 +81,9 @@ All DAGs are located in the `airflow/dags/` folder and will be parsed automatica
 
 ### Grafana
 
-**Access:** (Grafana URL)[http://localhost:3000]
+**Access:** [Grafana URL](http://localhost:3000)
+
+
 
 **Credentials:**
 - **Username:** `admin` 
@@ -95,7 +97,7 @@ All DAGs are located in the `airflow/dags/` folder and will be parsed automatica
 
 ### MongoDB
 
-**Access:** (mongodb://localhost:27017)[mongodb://localhost:27017]
+**Access:** [mongodb://localhost:27017](mongodb://localhost:27017)
 
 **Credentials:** no username and password
 
@@ -103,7 +105,7 @@ All DAGs are located in the `airflow/dags/` folder and will be parsed automatica
 
 ### PostgreSQL
 
-**Access:** (jdbc:postgresql://localhost:5433/airflow)[jdbc:postgresql://localhost:5433/airflow]
+**Access:** [jdbc:postgresql://localhost:5433/airflow](jdbc:postgresql://localhost:5433/airflow)
 
 **Credentials:**
 - **Username:** `airflow` 
