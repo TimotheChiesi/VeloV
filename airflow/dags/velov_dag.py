@@ -24,7 +24,7 @@ with DAG(
     description='Fetch Velo\'v station data every 5 minutes',
     schedule_interval='*/5 * * * *',  # Every 5 minutes
     start_date=datetime(2024, 1, 1),
-    is_paused_at_creation=False,
+    is_paused_upon_creation=False,
     catchup=False,
 ) as dag:
 
