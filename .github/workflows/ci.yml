@@ -41,8 +41,16 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
 
-      - name: Build containers
-        run: docker compose build
+      - name: Start airflow-init container
+        run: docker compose up -d airflow-init
+
+      - name: Give access to folders
+        run: |
+          sudo chown -R $USER:$USER ./airflow/dags
+          sudo chown -R $USER:$USER ./airflow/logs
+          sudo chown -R $USER:$USER ./airflow/plugins
+          sudo chown -R $USER:$USER ./src
+          sudo chown -R $USER:$USER ./monitoring
 
       - name: Start containers
         run: docker compose up -d
