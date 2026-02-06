@@ -51,9 +51,11 @@ jobs:
         run: |
           sudo chown -R ${AIRFLOW_UID}:0 airflow
 
-
-      - name: Start airflow-init container
-        run: docker compose up -d airflow-init
+      - name: Run airflow-init as root
+        run: |
+          docker compose run --rm \
+            --user 0:0 \
+            airflow-init
 
       - name: Verify Airflow Initialization
         run: |
