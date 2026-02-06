@@ -47,6 +47,11 @@ jobs:
           mkdir -p airflow/logs
           mkdir -p airflow/plugins
 
+      - name: Fix Airflow folder permissions
+        run: |
+          sudo chown -R ${AIRFLOW_UID}:0 airflow
+
+
       - name: Start airflow-init container
         run: docker compose up -d airflow-init
 
