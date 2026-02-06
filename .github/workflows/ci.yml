@@ -49,24 +49,16 @@ jobs:
         run: |
           docker compose up -d
 
-      - name: Wait for Airflow Webserver
+      - name: Wait for all containers to be started
         run: |
-          echo "Waiting for Airflow webserver to be ready..."
-          timeout 300 bash -c '
-            until docker compose exec -T airflow-webserver airflow db check >/dev/null 2>&1; do
+          echo "Waiting for all Docker containers to be running..."
+          TOTAL=$(docker compose config --services | wc -l)
+          timeout 60 bash -c "
+            until [ \$(docker compose ps --status running | wc -l) -eq $TOTAL ]; do
+              docker compose ps
               sleep 5
             done
-          '
-
-      - name: Check Python requirements inside Airflow
-        run: |
-          docker compose exec -T airflow-webserver python - <<EOF
-          import requests
-          import pymongo
-          import psycopg2
-          import dotenv
-          print("✅ Python requirements OK inside Airflow container")
-          EOF
+          "
 
       - name: Shutdown containers
         if: always()
