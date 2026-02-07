@@ -6,6 +6,52 @@
 This project fetches Velo’v bike station data in real time, processes it with **Airflow**, stores raw data in **MongoDB**, and writes cleaned, deduplicated data into **PostgreSQL**.  
 Monitoring is provided via **Prometheus** and **Grafana**, and the stack runs fully in **Docker**.
 
+## Overview
+
+This project leverages the Grand Lyon’s continuous API to monitor real-time statuses of VeloV bike-sharing stations in Lyon. The pipeline automatically aggregates, cleans, and analyzes station data for decision-making, maintenance, and operational insights.
+
+**Data Flow & Processing**
+
+1. Data Ingestion
+
+- Continuous API Polling: Every 5 minutes, the pipeline fetches live status of all VeloV stations via the Grand Lyon API.
+- Storage: Raw data is stored in a MongoDB data lake, preserving temporal context and raw records for auditing.
+
+2. Data Transformation & Validation
+
+- Cleaning Filter: A Python script processes the data, discarding:
+ - Invalid/duplicate entries.
+ - Station records that haven’t been updated since the last run.
+- Change Detection: Only new or updated data is retained for downstream analysis.
+
+3. Storage & Analytics
+
+- PostgreSQL Database: Cleaned data is loaded into PostgreSQL, where:
+ - Historical updates for each station are preserved in a time-series format.
+ - Temporal statistics enable trends analysis (e.g., occupancy patterns, usage spikes).
+ - Crowded station ranking identifies high-demand hubs for targeted services.
+
+**Key Features**
+
+- Real-Time Monitoring: Near-instant updates with 5-minute granularity.
+- Auditability: Raw data retained in MongoDB for traceability.
+- Scalable Analytics: PostgreSQL supports complex queries for operational insights.
+
+**Technical Stack**
+
+- API Layer: Grand Lyon Open Data API
+- Storage:
+  - MongoDB (raw data)
+  - PostgreSQL (processed, statistical data)
+- Processing: Python scripts (pipeline orchestration)
+
+**Why This Matters**
+
+- Proactive Maintenance: Detect anomalies (e.g., broken stations) to minimize downtime.
+- Resource Optimization: Identify peak-demand stations to allocate staff/vehicles efficiently.
+- Research Insights: Underpin studies on urban mobility, accessibility, or policy recommendations.
+
+
 ## 🧱 Architecture Overview
 
 ```
